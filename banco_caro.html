@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<h3>Cờ Caro</h3>
+<p id="game"></p>
+<body>
+<script>
+    var a=document.getElementById('game')
+    var m=parseInt(prompt('Nhap so hang:'));
+    var n=parseInt(prompt('Nhap so cot:'));
+    var board=[];
+    var data="";
+    var dau =1;
+    for (let i=0;i<=m;i++){
+        board[i]=[];
+        for (let j=0;j<=n;j++){
+            board[i][j]="_";
+        }
+    }
+    for (let i=0;i<=m;i++){
+        data+='<br/>'
+        for (let j=0;j<=n;j++){
+            data+=board[i][j]+ "&nbsp"+ "&nbsp";
+        }
+    }
+    data+="<br/><br/><input type='button' value='Change Value x' onclick='change1();'>"
+    data+="<input type='button' value='Change Value o' onclick='change2();'>"
+    a.innerHTML =data;
+    function change1() {
+        if (dau===1) {
+            var positionX=parseInt(prompt("X: "));
+            var positionY=parseInt(prompt("Y: "));
+            dau=0;
+        }
+        else {
+            alert("o chua co!!!")
+        }
+        data='';
+            board[positionX][positionY]="x";
+        for (let i=0;i<=m;i++){
+            data+='<br/>'
+            for (let j=0;j<=n;j++){
+                data+=board[i][j]+"&nbsp"+"&nbsp";
+            }
+        }
+        data+="<br/><br/><input type='button' value='Change Value x' onclick='change1();'>"
+        data+="<input type='button' value='Change Value o' onclick='change2();'>"
+        a.innerHTML=data;
+        kiemtra();
+    }
+    function change2() {
+        if (dau===0){
+            var positionX=parseInt(prompt("X: "));
+            var positionY=parseInt(prompt("Y: "));
+            dau=1;
+        }
+        else {
+            alert("x chua co!!!")
+        }
+        data='';
+        board[positionX][positionY]="o";
+        for (let i=0;i<=m;i++){
+            data+='<br/>'
+            for (let j=0;j<=n;j++){
+                data+=board[i][j]+"&nbsp"+"&nbsp";
+            }
+        }
+        data+="<br/><br/><input type='button' value='Change Value x' onclick='change1();'>"
+        data+="<input type='button' value='Change Value o' onclick='change2();'>"
+        a.innerHTML=data;
+        kiemtra();
+    }
+    function kiemtra() {
+        for (let i=0;i<=m-2;i++){
+            for (let j=0;j<=n-2;j++){
+                var trh1=board[i][j]==="x" && board[i][j+2]==="x" && board[i][j+1]==="x" ;
+                var trh2=board[i][j]==="x" && board[i+2][j]==="x"&& board[i+1][j]==="x";
+                var trh3=board[i][j]==="x" && board[i+2][j+2]==="x"&& board[i+1][j+1]==="x";
+                var trh4=board[i][j]==="x" && board[i+2][j-2]==="x"&& board[i+1][j-1]==="x";
+                var trh5=board[i][j]==="o" && board[i][j+2]==="o"&&board[i][j+1]==="o" ;
+                var trh6=board[i][j]==="o" && board[i+2][j]==="o"&&board[i+1][j]==="o";
+                var trh7=board[i][j]==="o" && board[i+2][j+2]==="o"&&board[i+1][j+1]==="o";
+                var trh8=board[i][j]==="o"&& board[i+2][j-2]==="o"&&board[i+1][j-1]==="o";
+                if (trh1 || trh2 ||trh3 ||trh4 ){
+                    alert("x Win!!!")
+                }
+                if (trh5 || trh6 ||trh7 ||trh8 ){
+                    alert("o Win!!!")
+                }
+            }
+        }
+        for (let i=2;i<=m;i++){
+            for (let j=2;j<=n;j++){
+                var th1=board[i][j]==="x" && board[i][j-2]==="x" && board[i][j-1]==="x" ;
+                var th2=board[i][j]==="x" && board[i-2][j]==="x"&& board[i-1][j]==="x";
+                var th3=board[i][j]==="x" && board[i-2][j-2]==="x"&& board[i-1][j-1]==="x";
+                // var trh4=board[i][j]==="x" && board[i+2][j-2]==="x"&& board[i+1][j-1]==="x";
+                var th5=board[i][j]==="o" && board[i][j-2]==="o"&&board[i][j-1]==="o" ;
+                var th6=board[i][j]==="o" && board[i-2][j]==="o"&&board[i-1][j]==="o";
+                var th7=board[i][j]==="o" && board[i-2][j-2]==="o"&&board[i-1][j-1]==="o";
+                // var trh8=board[i][j]==="o"&& board[i+2][j-2]==="o"&&board[i+1][j-1]==="o";
+                if (th1 || th2 ||th3  ){
+                    alert("x Win!!!")
+                }
+                if (th5 || th6 ||th7  ){
+                    alert("o Win!!!")
+                }
+            }
+        }
+    }
+
+
+</script>
+</body>
+</html>
